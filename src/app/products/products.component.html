@@ -10,10 +10,11 @@
     </tr>
     </thead>
     <tbody>
+
     <tr *ngFor="let product of products">
-      <td>{{product.name}}</td>
+      <td class="bold">{{product.name}}</td>
       <td>{{product.price}}</td>
-      <td>{{product.quantity}}</td> <!-- TODO: Display the quantity in red if it is lower than 3 -->
+      <td [ngClass]="{'lowQuantity' : product.quantity < 3}">{{product.quantity}}</td>
       <td>{{product.store}}</td>
     </tr>
 
@@ -24,6 +25,7 @@
       <td><input formControlName="store" type="text" placeholder="Store" class="form-control"></td>
       <td><button type="submit" class="btn btn-success" style="width: 70px" (click)="addProduct()">Add</button></td>
     </tr>
+    
     </tbody>
   </table>
 </div>

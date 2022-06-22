@@ -20,7 +20,8 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.productService.getProducts().subscribe((products) => {
-      this.products = products;  // TODO: Order the products by price
+      this.products = products;
+      this.sortProducts();
     });
   }
 
@@ -41,6 +42,11 @@ export class ProductsComponent implements OnInit {
       store: this.form.get('store').value
     };
     this.products.push(newProduct);
+    this.sortProducts();
     this.initForm();
+  }
+
+  sortProducts(): void {
+    this.products.sort((a, b) => (a.price > b.price) ? 1 : -1);
   }
 }

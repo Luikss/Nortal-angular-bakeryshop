@@ -1,3 +1,5 @@
+import { Employee } from './employee';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -5,10 +7,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EmployeeService {
+  apiUrl = 'https://reqres.in/api/users';
 
-  constructor() {}
+  constructor(private _http: HttpClient) {}
 
   getEmployees(): Observable<any> {
-    return; // TODO: Load data from backend service
+    return this._http.get<Employee[]>(this.apiUrl);
   }
 }

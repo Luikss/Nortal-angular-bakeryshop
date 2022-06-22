@@ -4,4 +4,14 @@ body {
   padding-top: 140px;
 }
 
-/*TODO: Set the font weight of the first table column to bold*/
+.lowQuantity {
+  color: red;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+}

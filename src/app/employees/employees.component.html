@@ -6,29 +6,38 @@
       <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
-      <!-- TODO: Add a column for an avatar -->
+      <th scope="col">Avatar</th>
       <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>123</td>
-      <td>Added name 1</td>
-      <td>email@email.com</td>
-      <td><button type="button" class="btn btn-danger">Delete</button></td>
-    </tr>
-    <tr>
-      <td>124</td>
-      <td>Added name 2</td>
-      <td>email2@email.com</td>
-      <td><button type="button" class="btn btn-danger">Delete</button></td>
+
+    <tr *ngFor='let employee of employees$; let i = index'>
+      <td class="bold">{{employee.id}}</td>
+      <td>{{employee.first_name}} {{employee.last_name}}</td>
+      <td>{{employee.email}}</td>
+      <td><img src={{employee.avatar}} alt="Avatar" style="width:128px;height:128px;"></td>
+      <td><button id="{{i}}" type="button" class="btn btn-danger" (click)="deleteEmployee($event)">Delete</button></td>
     </tr>
 
     <tr class="input-row" [formGroup]="form">
-      <td><input formControlName="id" type="text" placeholder="ID" class="form-control"></td>
-      <td><input formControlName="name" type="text" placeholder="Name" class="form-control"></td>
-      <td><input formControlName="email" type="text" placeholder="Email" class="form-control"></td>
-      <td><button type="submit" class="btn btn-success" style="width: 70px">Add</button></td>
+      <td>
+        <input formControlName="id" type="text" placeholder="ID" class="form-control">
+        <span class="error" *ngIf="id.invalid">ID is required and can contain only numbers.</span>
+      </td>
+      <td>
+        <input formControlName="name" type="text" placeholder="Name" class="form-control">
+        <span class="error" *ngIf="name.invalid">Name is required and can contain only letters (or spaces).</span>
+      </td>
+      <td>
+        <input formControlName="email" type="text" placeholder="Email" class="form-control">
+        <span class="error" *ngIf="email.invalid">Email is required and needs to match with a valid email pattern.</span>
+      </td>
+      <td>
+        <input formControlName="avatar" type="text" placeholder="Avatar (link)" class="form-control">
+        <span class="error" *ngIf="avatar.invalid">Avatar (link) is required.</span>
+      </td>
+      <td><button type="submit" class="btn btn-success" style="width: 70px" (click)="addEmployee()">Add</button></td>
     </tr>
     </tbody>
   </table>
