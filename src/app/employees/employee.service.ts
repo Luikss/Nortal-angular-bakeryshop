@@ -1,3 +1,4 @@
+import { environment } from '../../environments/environment';
 import { Employee } from './employee';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -7,11 +8,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EmployeeService {
-  apiUrl = 'https://reqres.in/api/users';
+  apiUrlUsers = environment.apiUrlUsers;
 
   constructor(private _http: HttpClient) {}
 
   getEmployees(): Observable<any> {
-    return this._http.get<Employee[]>(this.apiUrl);
+    return this._http.get<Employee[]>(this.apiUrlUsers);
   }
 }
